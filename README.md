@@ -1,5 +1,8 @@
 # Neural Differential Equations Repository
 
+![Neural CDE](img/ncde_diamgram.png)
+
+
 ## Overview
 This repository is dedicated to exploring Neural Differential Equations (NDEs), a cutting-edge intersection of neural networks and differential equations. The focus is on programming neural differential equations and comparing their performance and characteristics with traditional neural networks. This essay was written to satisfy the requirements of the MA395 Essay module at the Warwick Mathematics Institute.
 

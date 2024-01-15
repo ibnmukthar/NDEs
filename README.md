@@ -20,6 +20,9 @@ Contributions are welcome!
 ## Acknowledgements
 This project is under the guidance and supervision of [Professor Susana Gomes](https://warwick.ac.uk/fac/sci/maths/people/staff/gomes/). 
 
+Portions of this project are modifications based on work created and shared by [Patrick Kidger](https://github.com/patrick-kidger/torchcde.git) and used according to terms described in the Apache License 2.0.
+
+
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 

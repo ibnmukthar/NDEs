@@ -1,0 +1,84 @@
+import torch
+from torch.utils.data import DataLoader, TensorDataset, random_split
+from torch import nn, optim
+import torch.nn.functional as F
+
+# Load the data (assuming the data file path is 'Call_prices_59.pt')
+file_path = 'Call_prices_59.pt'
+data = torch.load(file_path)
+data_tensor = torch.from_numpy(data)
+
+# Splitting data into features and labels (assuming last column as label)
+features = data_tensor[:, :-1]
+labels = data_tensor[:, -1]
+
+# Splitting the dataset into training and validation sets (80-20 split)
+total_size = len(features)
+train_size = int(0.8 * total_size)
+val_size = total_size - train_size
+train_dataset, val_dataset = random_split(TensorDataset(features, labels), [train_size, val_size])
+
+# Neural Network Model Definition
+class SimpleNN(nn.Module):
+    def __init__(self, input_size):
+        super(SimpleNN, self).__init__()
+        self.fc1 = nn.Linear(input_size, 50)
+        self.fc2 = nn.Linear(50, 20)
+        self.fc3 = nn.Linear(20, 1)
+
+    def forward(self, x):
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x
+
+# Initialize the neural network
+input_size = features.shape[1]
+model = SimpleNN(input_size)
+
+# Xavier normal initialization with gain of 1.5
+def init_weights(m):
+    if isinstance(m, nn.Linear):
+        nn.init.xavier_normal_(m.weight, gain=1.5)
+
+model.apply(init_weights)
+
+# Loss function and optimizer
+criterion = nn.MSELoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+# Training and Validation Functions
+def train_model(train_loader, model, criterion, optimizer):
+    model.train()
+    total_loss = 0
+    for batch in train_loader:
+        inputs, targets = batch
+        optimizer.zero_grad()
+        outputs = model(inputs.float())
+        loss = criterion(outputs, targets.unsqueeze(1).float())
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item() * inputs.size(0)
+    return total_loss / len(train_loader.dataset)
+
+def validate_model(val_loader, model, criterion):
+    model.eval()
+    total_loss = 0
+    with torch.no_grad():
+        for batch in val_loader:
+            inputs, targets = batch
+            outputs = model(inputs.float())
+            loss = criterion(outputs, targets.unsqueeze(1).float())
+            total_loss += loss.item() * inputs.size(0)
+    return total_loss / len(val_loader.dataset)
+
+# Adjusted batch size to 40,000
+batch_size = 40000
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+
+# Training loop for 5 epochs
+for epoch in range(20):
+    train_loss = train_model(train_loader, model, criterion, optimizer)
+    val_loss = validate_model(val_loader, model, criterion)
+    print(f"Epoch {epoch+1}, Train Loss: {train_loss:.4f}, Validation Loss: {val_loss:.4f}")

@@ -1,7 +1,7 @@
 # Neural Differential Equations Repository
 
 ## Overview
-This repository is dedicated to exploring Neural Differential Equations (NDEs), a cutting-edge intersection of neural networks and differential equations. The focus is on programming neural differential equations and comparing their performance and characteristics with traditional neural networks.
+This repository is dedicated to exploring Neural Differential Equations (NDEs), a cutting-edge intersection of neural networks and differential equations. The focus is on programming neural differential equations and comparing their performance and characteristics with traditional neural networks. This essay was written to satisfy the requirements of the MA395 Essay module at the Warwick Mathematics Institute.
 
 ## Contents
 - **NDE Implementations**: Code and notebooks showcasing the implementation of various types of neural differential equations.
@@ -15,14 +15,13 @@ This repository is dedicated to exploring Neural Differential Equations (NDEs), 
 3. Explore the notebooks and scripts in the `src` directory.
 
 ## Contribution Guidelines
-Contributions are welcome! Please read our contribution guidelines for more information on how to contribute.
+Contributions are welcome!
+
+## Acknowledgements
+This project is under the guidance and supervision of [Professor Susana Gomes](https://warwick.ac.uk/fac/sci/maths/people/staff/gomes/). 
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contact
-For any queries or discussions, feel free to open an issue or contact [Your Name/Contact Information].
-
----
-
-Modify this template to suit the specific content and structure of your repository.
+For any queries or discussions, feel free to open an issue or contact [Muhammad Mukthar/muhammad.mukthar@warwick.ac.uk].

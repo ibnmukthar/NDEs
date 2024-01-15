@@ -1,6 +1,6 @@
 # Neural Differential Equations Repository
 
-![Neural CDE](img/ncde_diamgram.png)
+![Neural CDE](img/ncde_diagram.png)
 
 
 ## Overview
